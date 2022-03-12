@@ -370,3 +370,25 @@ Views are **virtual only** and run the query definition each time they are acces
 - add index to a column
 - try to reduce joins, remove unused join/join condition
 - union all instead of union
+
+## Strongly Consistent vs Eventually Consistent
+  - Strongly Consistent means that the data must be strongly consistent all the time, all nodes must contain the same value at any moment. 
+      - Only way to do so is by locking down nodes while being updated. This would have high cost of latency
+  - Eventually Consistent means that data store to be highly available, all reads of the data entity will eventually return the last updated value.
+      - Although replicas are always available to read, some replicas may be inconsistent with the latest write on the originating node, at a particular moment in time.
+
+## Index in SQL
+- is a datastructure to organize data in the table
+- clustered
+  - A clustered index is a special type of index that reorders the way records in the table are physically stored. Therefore table can have only one clustered index. The leaf nodes of a clustered index contain the data pages.
+- nonclustered
+  - Can be used many times per table
+  - Quicker for insert and update operations than a clustered index
+
+- Both types of index will improve performance when select data with fields that use the index but will slow down update and insert operations.
+
+- Because of the slower insert and update clustered indexes should be set on a field that is normally incremental ie Id or Timestamp.
+
+- b+ tree index vs hash index
+  - hash index can only access elements by their primary key in a hashtable. This is faster than with a tree algorithm (O(1) instead of log(n)), but it cannot select ranges (everything in between x and y)
+  - b+ tree index supports range select, whereas hash indexes can result in a full table scan O(n). Also b+ tree indexes are usually easier to maintain, grow with data, scale, etc.
