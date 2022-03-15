@@ -392,3 +392,39 @@ Views are **virtual only** and run the query definition each time they are acces
 - b+ tree index vs hash index
   - hash index can only access elements by their primary key in a hashtable. This is faster than with a tree algorithm (O(1) instead of log(n)), but it cannot select ranges (everything in between x and y)
   - b+ tree index supports range select, whereas hash indexes can result in a full table scan O(n). Also b+ tree indexes are usually easier to maintain, grow with data, scale, etc.
+
+## JDBC Driver
+- What is JDBC?
+  - JDBC stands for Java Database Connectivity. It's a JAVA API to  communicate with database and execute queries.
+
+- What are the JDBC Statements?
+  - Statement: It will execute SQL query (static) against the database by using createStatement() method of Connection class. It is preferred when a particular SQL query is to be executed only once.
+  - PreparedStatement: It will execute parameterized query by using prepareStatement() method of Connection class. It is preferred when a particular query is to be executed multiple times. 
+    - Prepared Statement is compiled only once.
+  - CallableStatement: CallableStatement interface is used to call the stored procedures and functions.
+  ```
+      //Creating CallableStatement object
+      CallableStatement cstmt = con.prepareCall("{call anyProcedure(?, ?, ?)}");
+      //Use cstmt.setter() methods to pass IN parameters
+      //Use cstmt.registerOutParameter() method to register OUT parameters
+      //Executing the CallableStatement
+
+      cstmt.execute();
+
+      //Use cstmt.getter() methods to retrieve the stored procedure result
+  ```
+
+- Some Important JDBC API components
+  - Connection
+  - Statement
+    - Statement
+    - PreparedStatement
+    - CallableStatement
+  - ResultSet
+  - DatabaseMetaData
+  - ResultSetMetaData
+
+- execute, executeQuery and executeUpdate
+  - Return type of execute is Boolean. The execute method can be used for any SQL statements(Select and Update both).
+  - Return type of executeQuery is ResultSet object. The executeQuery method can be used only with the select statement.
+  - Return type of executeUpdate is int. The executeUpdate method can be used to update/delete/insert operations in the database.
