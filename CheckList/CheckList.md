@@ -93,6 +93,16 @@
     - <? super T> allows class T and upper class of class T
 ## IO Stream
   - java.io package. stream is a continuous flow of data, usually connected to a data source, like a file or database connection. There are two kinds of streams, input and output.
+  - IO Stream chart
+
+|           | Byte                |                      | Character                |                           |
+|-----------|---------------------|----------------------|--------------------------|---------------------------|
+|           | Input               | Output               | Input                    | Output                    |
+| Basic     | InputStream         | OutputStream         | Reader InputStreamReader | Writer OutputStreamWriter |
+| Files     | FileInputStream     | FileOutputStream     | FileReader               | FileWriter                |
+| Buffering | BufferedInputStream | BufferedOutputStream | BufferedReader           | BufferedWriter            |
+| Data      | DataInputStream     | DataOutputStream     |                          |                           |
+    
 ## Serialization and Deserialization
   - done by implements Serializable
   - converts objects into a byte stream, deserialization is the opposite.
@@ -261,6 +271,20 @@ In short, Yes for Atomicity.
 ​​In MongoDB, Transactions (also called multi-documents transactions) are associated with a session. That is, you start a transaction for a session. At any given time, you can have at most one open transaction for a session.
 
 You can not lock the entire collection for writes. You may want to create multiple transactions to ensure that writes are not interlacing/overriding between your processes. MongoDB uses 
+
+## Locking
+- shared lock (S)
+    - also named read lock
+    - If t1 has read lock on resource A, t2 can read on A but cannot write on A
+- Exclusive lock (X)
+    - write lock
+    - If t1 has write lock on resource A, t2 cannot read or write on A 
+
+
+|   | S | X |
+|---|---|---|
+| S | Y | N |
+| X | N | N |
 
 ## Optimistic Locking
 
